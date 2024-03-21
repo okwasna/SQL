@@ -24,6 +24,10 @@ Zapytanie to ma na celu wyselekcjonowanie dziesięciu klientów, którzy łączn
 - `LIMIT 10`: Na końcu zapytania ustalamy limit na 10 rekordów, aby wyświetlić tylko dziesięciu klientów z największymi wydatkami.
 
 
+
+
+
+
 ### Problem biznesowy 2: 
 Firma chce wystartować z akcją marketingową i potrzebuje adresy mailowe wszystkich naszych klientów wraz z imieniem i nazwiskiem.
 
@@ -38,6 +42,10 @@ Zapytanie to ma na celu wyświetlenie wszystkich adresów mailowych naszych klie
 
 - `SELECT first_name, last_name, email `: Wybieram imię (`first_name`), nazwisko (`last_name`), adres mailowy klienta (`email`).
 - `FROM customer`: Dane są pobierane z tabeli `customer`, która zawiera informacje o klientach.
+
+
+
+
 
 
 ### Problem biznesowy 3:
@@ -57,6 +65,11 @@ Celem tego zapytania jest identyfikacja klientów, którzy nie wypełnili obowi�
 - `FROM customer`: Tabela `customer` jest miejscem, z którego pobierane są dane o klientach.
 - `WHERE email IS NULL OR email = ''`: Warunek w klauzuli `WHERE` filtruje wyniki w celu znalezienia rekordów, w których pole adresu e-mailowego nie zostało wypełnione (jest `NULL`) lub jest puste (`email = ''`).
 
+
+
+
+
+
 ### Problem biznesowy 4:
 **Analiza dostępności filmów z określonym kosztem zastępczym**
 
@@ -75,6 +88,10 @@ Zapytanie SQL służy do określenia liczby filmów z kategorii ratingu 'R', kt�
 - `FROM film`: Określa tabelę `film` jako źródło danych do analizy.
 - `WHERE rating='R'`: Filtruje filmy tak, aby brane pod uwagę były jedynie te z oceną 'R', czyli przeznaczone dla widzów dorosłych.
 - `AND replacement_cost BETWEEN 5 AND 15`: Dodatkowo, warunek ten ogranicza wyniki do filmów, których koszt zastępczy mieści się w przedziale od 5 do 15 dolarów. 
+
+
+
+
 
 
 ### Problem biznesowy 5:
@@ -97,6 +114,10 @@ Celem zapytania jest identyfikacja pracownika, który przetworzył największą 
 - `GROUP BY staff_id`: Grupowanie według `staff_id` umożliwia zliczenie płatności dla każdego pracownika oddzielnie.
 - `ORDER BY number_of_payments DESC`: Sortowanie wyników w porządku malejącym po liczbie płatności sprawia, że na górze znajdą się pracownicy z największą liczbą transakcji.
 - `LIMIT 1`: Ograniczamy wyniki do jednego rekordu, aby wybrać pracownika z najwyższą liczbą przetworzonych płatności.
+
+
+
+
 
 
 ### Problem biznesowy 6:

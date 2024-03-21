@@ -58,5 +58,15 @@ Celem tego zapytania jest identyfikacja klientów, którzy nie wypełnili obowi�
 - `WHERE email IS NULL OR email = ''`: Warunek w klauzuli `WHERE` filtruje wyniki w celu znalezienia rekordów, w których pole adresu e-mailowego nie zostało wypełnione (jest `NULL`) lub jest puste (`email = ''`).
 
 
+### Opis działania:
+Zapytanie SQL służy do określenia liczby filmów z kategorii ratingu 'R', które mają określony zakres kosztów zastępczych. Wykorzystuje ono następującą logikę:
+
+- `SELECT COUNT(rating)`: Polecenie to wylicza liczbę wystąpień kolumny `rating` w tabeli, co w efekcie da nam liczbę filmów spełniających podane kryteria.
+- `FROM film`: Określa tabelę `film` jako źródło danych do analizy.
+- `WHERE rating='R'`: Filtruje filmy tak, aby brane pod uwagę były jedynie te z oceną 'R', czyli przeznaczone dla widzów dorosłych.
+- `AND replacement_cost BETWEEN 5 AND 15`: Dodatkowo, warunek ten ogranicza wyniki do filmów, których koszt zastępczy mieści się w przedziale od 5 do 15 dolarów. 
+
+
+
 
 

@@ -99,6 +99,31 @@ Celem zapytania jest identyfikacja pracownika, który przetworzył największą 
 - `LIMIT 1`: Ograniczamy wyniki do jednego rekordu, aby wybrać pracownika z najwyższą liczbą przetworzonych płatności.
 
 
+### Problem biznesowy 6:
+**Identyfikacja klientów kwalifikujących się do promocji za wydatki przekraczające 110 USD u pracownika o identyfikatorze 2**
+
+#### Zapytanie SQL:
+```sql
+SELECT customer_id, SUM(amount) 
+FROM payment
+WHERE staff_id=2
+GROUP BY customer_id
+HAVING SUM(amount) > 110;
+```
+
+#### Opis działania:
+Celem zapytania jest znalezienie klientów, którzy wydali łącznie więcej niż 110 USD u pracownika o identyfikatorze 2, aby mogli skorzystać z promocji -10% na kolejne zakupy. Zapytanie to jest skonstruowane, aby identyfikować te osoby, które spełniają warunki promocji. Oto, jak zapytanie osiąga ten cel:
+
+- `SELECT customer_id, SUM(amount)`: Zapytanie wybiera identyfikator klienta (`customer_id`) i sumuje kwoty (`SUM(amount)`) wszystkich jego płatności, aby określić całkowitą kwotę wydaną przez każdego klienta.
+
+- `FROM payment`: Wykorzystywana jest tabela `payment`, która zawiera informacje o płatnościach dokonywanych przez klientów.
+
+- `WHERE staff_id=2`: Filtr aplikowany do zapytania, ograniczający wyniki do płatności przetworzonych przez pracownika o identyfikatorze 2. Zapewnia to, że promocja jest stosowana tylko do transakcji obsłużonych przez tego pracownika.
+
+- `GROUP BY customer_id`: Zapytanie grupuje wyniki według identyfikatora klienta (`customer_id`), co umożliwia agregację i obliczenie sumy wydatków dla każdego klienta indywidualnie.
+
+- `HAVING SUM(amount) > 110`: Klauzula `HAVING` jest używana do filtrowania wyników, tak aby w zestawieniu końcowym znaleźli się tylko klienci, którzy wydali więcej niż 110 USD. Dzięki temu, zidentyfikowane zostają tylko te osoby, które kwalifikują się do otrzymania promocji.
+
 
 
 

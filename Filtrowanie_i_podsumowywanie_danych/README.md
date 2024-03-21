@@ -89,7 +89,7 @@ ORDER BY number_of_payments DESC
 LIMIT 1;
 ```
 
-#### Opis działania:
+### Opis działania:
 Celem zapytania jest identyfikacja pracownika, który przetworzył największą liczbę płatności. Wyróżnienie tego pracownika premią ma na celu podkreślenie znaczenia liczby transakcji, a nie ich wartości. Oto jak zapytanie osiąga ten cel:
 
 - `SELECT staff_id, COUNT(*) AS number_of_payments`: Wybieramy identyfikator pracownika (`staff_id`) i liczymy całkowitą liczbę płatności (`COUNT(*)`), które przypisane są do każdego pracownika, tworząc sumaryczną liczbę jako `number_of_payments`.
@@ -111,7 +111,7 @@ GROUP BY customer_id
 HAVING SUM(amount) > 110;
 ```
 
-#### Opis działania:
+### Opis działania:
 Celem zapytania jest znalezienie klientów, którzy wydali łącznie więcej niż 110 USD u pracownika o identyfikatorze 2, aby mogli skorzystać z promocji -10% na kolejne zakupy. Zapytanie to jest skonstruowane, aby identyfikować te osoby, które spełniają warunki promocji. Oto, jak zapytanie osiąga ten cel:
 
 - `SELECT customer_id, SUM(amount)`: Zapytanie wybiera identyfikator klienta (`customer_id`) i sumuje kwoty (`SUM(amount)`) wszystkich jego płatności, aby określić całkowitą kwotę wydaną przez każdego klienta.

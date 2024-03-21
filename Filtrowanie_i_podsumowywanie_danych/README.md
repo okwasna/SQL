@@ -57,6 +57,14 @@ Celem tego zapytania jest identyfikacja klientów, którzy nie wypełnili obowi�
 - `FROM customer`: Tabela `customer` jest miejscem, z którego pobierane są dane o klientach.
 - `WHERE email IS NULL OR email = ''`: Warunek w klauzuli `WHERE` filtruje wyniki w celu znalezienia rekordów, w których pole adresu e-mailowego nie zostało wypełnione (jest `NULL`) lub jest puste (`email = ''`).
 
+### Problem biznesowy:
+**Analiza dostępności filmów z określonym kosztem zastępczym**
+
+#### Zapytanie SQL:
+```sql
+SELECT COUNT(rating) FROM film
+WHERE rating='R'
+AND replacement_cost BETWEEN 5 AND 15;
 
 ### Opis działania:
 Zapytanie SQL służy do określenia liczby filmów z kategorii ratingu 'R', które mają określony zakres kosztów zastępczych. Wykorzystuje ono następującą logikę:

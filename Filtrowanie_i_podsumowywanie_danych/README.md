@@ -77,6 +77,30 @@ Zapytanie SQL służy do określenia liczby filmów z kategorii ratingu 'R', kt�
 - `AND replacement_cost BETWEEN 5 AND 15`: Dodatkowo, warunek ten ogranicza wyniki do filmów, których koszt zastępczy mieści się w przedziale od 5 do 15 dolarów. 
 
 
+### Problem biznesowy 5:
+**Premiowanie pracownika z największą liczbą przetworzonych płatności**
+
+#### Zapytanie SQL:
+```sql
+SELECT staff_id, COUNT(*) AS number_of_payments
+FROM payment
+GROUP BY staff_id
+ORDER BY number_of_payments DESC
+LIMIT 1;
+```
+
+#### Opis działania:
+Celem zapytania jest identyfikacja pracownika, który przetworzył największą liczbę płatności. Wyróżnienie tego pracownika premią ma na celu podkreślenie znaczenia liczby transakcji, a nie ich wartości. Oto jak zapytanie osiąga ten cel:
+
+- `SELECT staff_id, COUNT(*) AS number_of_payments`: Wybieramy identyfikator pracownika (`staff_id`) i liczymy całkowitą liczbę płatności (`COUNT(*)`), które przypisane są do każdego pracownika, tworząc sumaryczną liczbę jako `number_of_payments`.
+- `FROM payment`: Tabela `payment` jest używana jako źródło danych, zawierająca informacje o wszystkich transakcjach.
+- `GROUP BY staff_id`: Grupowanie według `staff_id` umożliwia zliczenie płatności dla każdego pracownika oddzielnie.
+- `ORDER BY number_of_payments DESC`: Sortowanie wyników w porządku malejącym po liczbie płatności sprawia, że na górze znajdą się pracownicy z największą liczbą transakcji.
+- `LIMIT 1`: Ograniczamy wyniki do jednego rekordu, aby wybrać pracownika z najwyższą liczbą przetworzonych płatności.
+
+
+
+
 
 
 

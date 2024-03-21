@@ -146,6 +146,33 @@ Celem zapytania jest znalezienie klientów, którzy wydali łącznie więcej ni�
 - `HAVING SUM(amount) > 110`: Klauzula `HAVING` jest używana do filtrowania wyników, tak aby w zestawieniu końcowym znaleźli się tylko klienci, którzy wydali więcej niż 110 USD. Dzięki temu, zidentyfikowane zostają tylko te osoby, które kwalifikują się do otrzymania promocji.
 
 
+### Problem biznesowy 7:
+**Znalezienie klienta z najwyższym ID, którego imię zaczyna się na literę "E" i ma identyfikator adresu niższy niż 500**
+
+#### Zapytanie SQL:
+```sql
+SELECT customer_id, first_name, last_name, address_id 
+FROM customer
+WHERE first_name LIKE 'E%'
+AND address_id < 500
+ORDER BY customer_id DESC
+LIMIT 1;
+```
+
+### Opis działania:
+Celem tego zapytania jest identyfikacja klienta spełniającego dwa kryteria: jego imię zaczyna się na literę "E", oraz posiada identyfikator adresu mniejszy niż 500. Klient ten ma także najwyższy numer ID wśród wszystkich klientów spełniających te warunki. Oto jak zapytanie osiąga ten cel:
+
+- `SELECT customer_id, first_name, last_name, address_id`: Zapytanie wybiera dane klienta, takie jak identyfikator klienta (`customer_id`), imię (`first_name`), nazwisko (`last_name`) oraz identyfikator adresu (`address_id`), aby umożliwić pełną identyfikację klienta spełniającego kryteria wyszukiwania.
+
+- `FROM customer`: Dane są pobierane z tabeli `customer`, która zawiera informacje o klientach.
+
+- `WHERE first_name LIKE 'E%'`: Zapytanie stosuje filtr do imienia klienta, wybierając tylko tych klientów, których imię zaczyna się od litery "E". Operator `LIKE` w połączeniu ze znakiem `%` pozwala na wyszukanie wszystkich imion zaczynających się na "E", niezależnie od dalszej części imienia.
+
+- `AND address_id < 500`: Dodatkowy warunek ogranicza wyszukiwanie do klientów, których identyfikator adresu jest mniejszy niż 500, co pozwala na dodatkowe zawężenie grupy docelowej klientów.
+
+- `ORDER BY customer_id DESC`: Wyniki są sortowane w odwrotnej kolejności numerycznej (malejąco) według `customer_id`, co oznacza, że na górze listy znajdzie się klient z najwyższym identyfikatorem spełniający wcześniej określone kryteria.
+
+- `LIMIT 1`: Klauzula `LIMIT 1` ogranicza wyniki do jednego rekordu, dzięki czemu otrzymujemy informacje wyłącznie o kliencie z najwyższym numerem ID spełniającym oba kryteria.
 
 
 

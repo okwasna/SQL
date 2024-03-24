@@ -4,7 +4,7 @@
 ### Problem biznesowy 1: 
 Szef poprosił Cię o listę wszystkich klientów(imię, nazwisko, id), którzy wykonali zakupy w naszym sklepie.
 
-###Zapytanie SQL:
+### Zapytanie SQL:
 
 ```sql
 SELECT DISTINCT customer.customer_id, first_name, last_name
@@ -12,7 +12,7 @@ FROM customer
 INNER JOIN payment ON customer.customer_id = payment.customer_id
 ```
 
-###Opis działania:
+### Opis działania:
 
 Zapytanie to służy do wyodrębnienia unikalnych rekordów klientów, którzy dokonali zakupów w sklepie, uwzględniając ich identyfikatory, imiona oraz nazwiska. Proces ten składa się z kilku kroków:
 

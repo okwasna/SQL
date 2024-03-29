@@ -43,3 +43,29 @@ WHERE address.district = 'California'
 
 4. **WHERE address.district = 'California'**: Klauzula `WHERE` filtruje wyniki zapytania tak, aby zawierały tylko te rekordy, dla których wartość w kolumnie `district` tabeli `address` jest równa 'California'. Dzięki temu zapytanie zwróci informacje tylko o tych klientach, którzy mieszkają w określonym dystrykcie i którzy będą musieli zostać poinformowani o zmianie prawa dotyczącego podatku od sprzedaży.
 
+### Problem Biznesowy 3:
+
+Klient chce znaleźć wszystkie filmy, w których gra aktor o imieniu Nick Wahlberg. Jest to typowe zadanie w branży rozrywkowej, które pomaga klientom szybko znaleźć treści związane z konkretnymi aktorami, na które mogą chcieć zwrócić uwagę lub które chcą oglądać. Wiedza o tym, w jakich filmach występuje dany aktor, może również wspierać działania marketingowe i promocyjne związane z nowymi wydaniami lub rekomendacjami filmów.
+
+### Zapytanie SQL:
+
+```sql
+SELECT film.title, actor.first_name, actor.last_name 
+FROM film
+INNER JOIN film_actor ON film.film_id = film_actor.film_id
+LEFT JOIN actor ON actor.actor_id = film_actor.actor_id
+WHERE first_name= 'Nick' AND last_name= 'Wahlberg'
+```
+
+### Opis Działania:
+
+1. **SELECT film.title, actor.first_name, actor.last_name**: Polecenie to instruuje bazę danych, aby wybrała tytuły filmów oraz imiona i nazwiska aktorów. Jest to zestaw danych, który zostanie zwrócony jako wynik zapytania, pozwalając klientowi zidentyfikować filmy z udziałem Nicka Wahlberga.
+
+2. **FROM film**: Określa tabelę `film` jako punkt wyjścia dla zapytania. Jest to podstawowa tabela zawierająca informacje o filmach, w tym ich tytuły.
+
+3. **INNER JOIN film_actor ON film.film_id = film_actor.film_id**: Ta część zapytania wykonuje wewnętrzne łączenie (INNER JOIN) tabeli `film` z tabelą `film_actor` na podstawie wspólnego klucza, którym jest `film_id`. Pozwala to na połączenie informacji o filmach z informacjami o aktorach, którzy w tych filmach występują, na podstawie relacji film-aktor.
+
+4. **LEFT JOIN actor ON actor.actor_id = film_actor.actor_id**: Następnie zapytanie wykonuje lewe łączenie (LEFT JOIN) z tabelą `actor`, aby połączyć informacje o aktorach z poprzednio utworzonym zestawem danych. Używa klucza `actor_id` do zidentyfikowania, którzy aktorzy są związani z każdym filmem. Wybór LEFT JOIN (zamiast INNER JOIN) pozwala na zachowanie wszystkich rekordów z lewej tabeli (`film_actor`), nawet jeśli nie znajdzie się dokładne dopasowanie w tabeli `actor`, co jest szczególnie przydatne w innych scenariuszach; tutaj jednak, w kontekście tego zapytania, można by rozważyć użycie INNER JOIN, ponieważ zakładamy istnienie dopasowania.
+
+5. **WHERE first_name= 'Nick' AND last_name= 'Wahlberg'**: Klauzula WHERE jest używana do filtrowania wyników, tak aby zwrócić tylko te rekordy, które dotyczą aktora o imieniu Nick i nazwisku Wahlberg. To ograniczenie pozwala na precyzyjne określenie, których aktorów dotyczy zapytanie.
+

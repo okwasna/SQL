@@ -1,4 +1,4 @@
-### Problem Biznesowy:
+### Problem Biznesowy 1:
 
 Firma chce analizować swoje przychody w podziale na kwartały każdego roku, aby zidentyfikować trendy wzrostu, sezonowość, oraz okresy o największej i najmniejszej aktywności klientów. Analiza ta ma na celu lepsze planowanie działań marketingowych, budżetowania oraz dostosowywanie poziomu zapasów i personelu do przewidywanego popytu.
 

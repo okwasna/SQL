@@ -69,3 +69,36 @@ WHERE first_name= 'Nick' AND last_name= 'Wahlberg'
 
 5. **WHERE first_name= 'Nick' AND last_name= 'Wahlberg'**: Klauzula WHERE jest używana do filtrowania wyników, tak aby zwrócić tylko te rekordy, które dotyczą aktora o imieniu Nick i nazwisku Wahlberg. To ograniczenie pozwala na precyzyjne określenie, których aktorów dotyczy zapytanie.
 
+### Problem Biznesowy 4:
+
+W ramach inicjatywy mającej na celu wzmocnienie relacji z kluczowymi klientami, dział marketingu zamierza przeprowadzić kampanię e-mailową. Celem jest dotarcie do 10 klientów, którzy wydali najwięcej pieniędzy w naszym sklepie, przekraczając kwotę 100. Kampania ta ma na celu nie tylko podziękowanie tym klientom za ich lojalność, ale także zaoferowanie im specjalnych rabatów i zaproszeń do programów VIP.
+
+### Zapytanie SQL:
+
+```sql
+SELECT customer.first_name || ' ' || customer.last_name AS full_name,
+       customer.email,
+       SUM(payment.amount) AS total_price
+FROM customer
+JOIN payment ON customer.customer_id = payment.customer_id
+GROUP BY customer.first_name, customer.last_name, customer.email
+HAVING SUM(payment.amount) > 100
+ORDER BY SUM(payment.amount) DESC
+LIMIT 10;
+```
+
+### Opis Działania:
+
+- **SELECT customer.first_name || ' ' || customer.last_name AS full_name, customer.email, SUM(payment.amount) AS total_price**: Polecenie to łączy imię i nazwisko klienta w jedną kolumnę `full_name` i wybiera ich adres email oraz sumę wydatków (`payment.amount`). Użycie funkcji agregującej `SUM()` pozwala na obliczenie całkowitej kwoty wydanej przez każdego klienta.
+
+- **FROM customer JOIN payment ON customer.customer_id = payment.customer_id**: Klauzula FROM określa tabelę źródłową (`customer`), a JOIN dołącza tabelę `payment` w celu połączenia danych o płatnościach klientów z ich rekordami. Dołączenie odbywa się poprzez porównanie identyfikatorów klientów (`customer.customer_id`) w obu tabelach.
+
+- **GROUP BY customer.first_name, customer.last_name, customer.email**: Grupowanie wyników według imienia, nazwiska i emaila klienta zapewnia, że suma wydatków jest obliczana indywidualnie dla każdego klienta. To również umożliwia selekcję unikalnych rekordów klienta, eliminując powtórzenia.
+
+- **HAVING SUM(payment.amount) > 100**: Klauzula HAVING filtruje zgrupowane rekordy, pozostawiając tylko te, dla których suma wydatków przekracza 100. To kryterium wyboru pozwala skupić się na klientach, którzy najwięcej wydali.
+
+- **ORDER BY SUM(payment.amount) DESC**: Sortowanie wyników w malejącej kolejności według sumy wydatków pozwala na ustalenie, którzy klienci wydali najwięcej. 
+
+- **LIMIT 10**: Ograniczenie wyników do 10 najwyższych sum wydatków zapewnia, że kampania e-mailowa będzie skierowana tylko do najbardziej wartościowych klientów z punktu widzenia finansowego.
+
+Wykonanie tego zapytania umożliwi działowi marketingu precyzyjne zidentyfikowanie klientów, którzy są najbardziej zaangażowani finansowo, co pozwoli na skuteczniejsze budowanie z nimi długoterminowych relacji.

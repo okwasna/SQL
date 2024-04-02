@@ -101,7 +101,6 @@ LIMIT 10;
 
 - **LIMIT 10**: Ograniczenie wyników do 10 najwyższych sum wydatków zapewnia, że kampania e-mailowa będzie skierowana tylko do najbardziej wartościowych klientów z punktu widzenia finansowego.
 
-Wykonanie tego zapytania umożliwi działowi marketingu precyzyjne zidentyfikowanie klientów, którzy są najbardziej zaangażowani finansowo, co pozwoli na skuteczniejsze budowanie z nimi długoterminowych relacji.
 
 ### Problem Biznesowy 5:
 
@@ -146,7 +145,7 @@ ORDER BY payment.amount DESC;
 
 Rozumiem, co masz na myśli. Oto szczegółowy opis działania twojego zapytania SQL, skonstruowany w oparciu o podany przykład:
 
-- ** SELECT first_name, last_name, customer.email, payment.amount**: Wybierane są imię i nazwisko klienta oraz jego adres email z tabeli `customer`, a także kwota każdej płatności z tabeli `payment`. Te informacje są niezbędne, aby zidentyfikować klientów dokonujących wyjątkowo wysokich zakupów i umożliwiają bezpośredni kontakt z nimi poprzez email. Selekcja kwoty płatności pozwala na ocenę wielkości transakcji dokonanych przez klientów.
+- **SELECT first_name, last_name, customer.email, payment.amount**: Wybierane są imię i nazwisko klienta oraz jego adres email z tabeli `customer`, a także kwota każdej płatności z tabeli `payment`. Te informacje są niezbędne, aby zidentyfikować klientów dokonujących wyjątkowo wysokich zakupów i umożliwiają bezpośredni kontakt z nimi poprzez email. Selekcja kwoty płatności pozwala na ocenę wielkości transakcji dokonanych przez klientów.
 
 - **FROM customer**: Klauzula `FROM` wskazuje na tabelę `customer` jako źródło danych, która zawiera szczegółowe informacje o klientach. Jest to punkt wyjścia do łączenia danych klientów z informacjami o ich płatnościach.
 

@@ -128,3 +128,30 @@ ORDER BY customer_id ASC;
 
 - **ORDER BY customer_id ASC**: Wyniki są sortowane w porządku rosnącym według identyfikatora klienta (`customer_id`). Takie uporządkowanie ułatwia pracę z danymi, zwłaszcza w przypadku synchronizacji z innymi systemami lub rekordami, gdzie konsekwentna kolejność rekordów jest kluczowa.
 
+### Problem Biznesowy 6:
+
+Firma XYZ, działająca w branży e-commerce, dąży do zapewnienia wyjątkowej obsługi klienta poprzez proaktywną komunikację. Zauważyli, że niektóre transakcje znacząco odbiegają od średniej wartości zakupu, co może budzić zaniepokojenie klientów odnośnie dokonywanych wydatków. Aby temu zaradzić, planują wysłać spersonalizowane e-maile do klientów, którzy dokonali transakcji przekraczających 150% średniej wartości płatności. Celem jest oferowanie bezpośredniego wsparcia i adresowanie wszelkich obaw związanych z takimi zakupami. Lista ta musi być precyzyjna, zawierać pełne dane klienta i kwotę transakcji, oraz być uporządkowana od największych transakcji, aby usprawnić proces komunikacji.
+
+### Zapytanie SQL:
+
+```sql
+SELECT customer.first_name, customer.last_name, customer.email, payment.amount
+FROM customer
+LEFT JOIN payment ON customer.customer_id = payment.customer_id
+WHERE payment.amount > 1.5 * (SELECT AVG(amount) FROM payment)
+ORDER BY payment.amount DESC;
+```
+
+### Opis Działania:
+
+Rozumiem, co masz na myśli. Oto szczegółowy opis działania twojego zapytania SQL, skonstruowany w oparciu o podany przykład:
+
+- ** SELECT first_name, last_name, customer.email, payment.amount**: Wybierane są imię i nazwisko klienta oraz jego adres email z tabeli `customer`, a także kwota każdej płatności z tabeli `payment`. Te informacje są niezbędne, aby zidentyfikować klientów dokonujących wyjątkowo wysokich zakupów i umożliwiają bezpośredni kontakt z nimi poprzez email. Selekcja kwoty płatności pozwala na ocenę wielkości transakcji dokonanych przez klientów.
+
+- **FROM customer**: Klauzula `FROM` wskazuje na tabelę `customer` jako źródło danych, która zawiera szczegółowe informacje o klientach. Jest to punkt wyjścia do łączenia danych klientów z informacjami o ich płatnościach.
+
+- **LEFT JOIN payment ON customer.customer_id = payment.customer_id**: Operacja `LEFT JOIN` połączenia tabeli `customer` z tabelą `payment` za pomocą wspólnego identyfikatora `customer_id` umożliwia złączenie danych o klientach z informacjami o dokonanych przez nich płatnościach. Dzięki temu można uwzględnić wszystkich klientów, nawet tych bez zarejestrowanych płatności, ale w kontekście tego zapytania skupiamy się na tych, którzy przekroczyli określony próg wydatków.
+
+- **WHERE payment.amount > 1.5 * (SELECT AVG(amount) FROM payment)**: Klauzula `WHERE` filtruje płatności, pozostawiając tylko te, które są większe niż 150% średniej kwoty wszystkich płatności. Obliczenie średniej wartości płatności za pomocą podzapytania umożliwia dynamiczne dostosowanie progu do bieżących trendów zakupowych. To kryterium selekcji wskazuje na zamiar skoncentrowania się na najbardziej wartościowych transakcjach.
+
+- **ORDER BY payment.amount DESC**: Kluczowym elementem zapytania jest klauzula `ORDER BY`, która sortuje wyniki w porządku malejącym według kwoty płatności (`payment.amount`). Decyzja o sortowaniu w ten sposób jest podjęta, aby na czele listy znaleźli się klienci, którzy dokonali największych zakupów. Takie uporządkowanie ułatwia identyfikację transakcji o najwyższej wartości, co jest szczególnie przydatne w strategiach marketingowych skierowanych na promowanie lojalności i zwiększanie wartości życiowej klienta.

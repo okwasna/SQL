@@ -102,3 +102,29 @@ LIMIT 10;
 - **LIMIT 10**: Ograniczenie wyników do 10 najwyższych sum wydatków zapewnia, że kampania e-mailowa będzie skierowana tylko do najbardziej wartościowych klientów z punktu widzenia finansowego.
 
 Wykonanie tego zapytania umożliwi działowi marketingu precyzyjne zidentyfikowanie klientów, którzy są najbardziej zaangażowani finansowo, co pozwoli na skuteczniejsze budowanie z nimi długoterminowych relacji.
+
+### Problem Biznesowy 5:
+
+Dział IT firmy X został poproszony o przygotowanie unikatowych adresów e-mailowych dla wszystkich obecnych klientów w systemie. Te adresy e-mail mają być używane do wewnętrznych celów komunikacyjnych, takich jak wysyłanie informacji o aktualizacjach konta, powiadomień o konserwacji systemu oraz ekskluzywnych newsletterów. Format adresu e-mail powinien składać się z pierwszej litery imienia klienta, połączonej z jego nazwiskiem (wszystko zapisane małymi literami), z dodaniem domeny `@xfirma.com` na końcu. Lista ta musi być uporządkowana według identyfikatora klienta, aby ułatwić synchronizację z obecnymi rekordami systemowymi.
+
+### Zapytanie SQL:
+
+```sql
+SELECT LOWER(LEFT(first_name,1)) || LOWER(last_name) || '@xfirma.com' AS email, 
+       first_name, 
+       last_name, 
+       customer_id
+FROM customer
+ORDER BY customer_id ASC;
+```
+
+### Opis Działania:
+
+- **SELECT LOWER(LEFT(first_name,1)) || LOWER(last_name) || '@xfirma.com' AS email**: Polecenie to konstruuje adres e-mail dla każdego klienta, łącząc pierwszą literę imienia (używając funkcji `LEFT(first_name,1)`) z pełnym nazwiskiem (wszystko przekształcone na małe litery za pomocą funkcji `LOWER()`), a następnie dodając domenę `@xfirma.com`. Wynikowy adres e-mail jest przypisywany do aliasu `email`.
+
+- **first_name, last_name, customer_id**: Wybierane są również imię, nazwisko oraz identyfikator klienta, aby zapewnić pełną identyfikowalność każdego rekordu i umożliwić łatwe skorelowanie adresów e-mail z istniejącymi danymi klientów.
+
+- **FROM customer**: Klauzula FROM określa, że dane będą pobierane z tabeli `customer`, która zawiera informacje o klientach.
+
+- **ORDER BY customer_id ASC**: Wyniki są sortowane w porządku rosnącym według identyfikatora klienta (`customer_id`). Takie uporządkowanie ułatwia pracę z danymi, zwłaszcza w przypadku synchronizacji z innymi systemami lub rekordami, gdzie konsekwentna kolejność rekordów jest kluczowa.
+
